@@ -6,24 +6,26 @@ Note: An xyz point on the cylinder surface is not considered inside.
 History:
 Who          Date        What
 Shane Wilson 04-JUL-2024 Initial version
+Shane Wilson 04-JUL-2024 Tidy comments.
 
 Future 'To do':
 1. Subclass Cylinder to create Closed Cylinder if height needed.
-2. Consider a FFT algorithm for the distance multiplication which could be slow.
+2. Consider a FFT algorithm to improve the distance multiplication which could be slow.
 3. Consider float formatting and round.
 4. Refactor Pythagoras class for a general distance formula.
 5. Validate xyz co-ordinates before passing to distance function.
+6. Expand the test cases.  Ensure edge cases are tested.
 """
 from dataclasses import dataclass
 import math
 
-# A class to model an (x,y) co-ordinate.
+# A class to model a (x,y) co-ordinate.
 @dataclass
 class Point():
     x: float
     y: float
 
-# A class to model an (x,y,z) co-ordinate.
+# A class to model a (x,y,z) co-ordinate.
 @dataclass
 class ThreeDimensionalPoint(Point):
     z: float
@@ -47,8 +49,8 @@ class Circle(Point):
         self._radius = radius
 
 # A class to model a cylinder. Note this cylinder has no height component
-# (i.e. infinite sides) an looks like a circle but is still considered
-# # as a different type so it is subclassed from Circle.
+# (i.e. infinite sides) and looks like a circle but is still considered
+# as a different type so it is subclassed from Circle.
 class Cylinder(Circle):
     def __init__(self, x: float, y: float, radius: float):
         super().__init__(x, y, radius)
@@ -62,7 +64,7 @@ class Pythagoras():
                          (threeDimensionalPoint.y - cylinder.y)**2)
 
 if __name__ == '__main__':
-    # Test cases here.
+    # Test case 1 - Confirm xyz inside the cylinder.
     threeDimensionalPoint = ThreeDimensionalPoint(x=4, y=5, z=16)
     cylinder = Cylinder(x=1, y=2, radius=8)
 
